@@ -1,11 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe 'Article management', type: :system do
-  before do
-    # driven_by(:rack_test)
+  let!(:articles) { create_list(:article, 32) }
+
+  it 'enables me to create widgets' do
+    visit '/articles'
   end
 
   it 'enables me to create widgets' do
-    visit "/articles/new"
+    visit '/articles/new'
   end
 end
