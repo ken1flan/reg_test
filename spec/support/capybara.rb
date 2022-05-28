@@ -15,8 +15,12 @@ RSpec.configure do |config|
   end
 
   def save_full_screenshot(path)
-    width  = Capybara.page.execute_script("return Math.max(document.body.scrollWidth, document.body.offsetWidth, document.documentElement.clientWidth, document.documentElement.scrollWidth, document.documentElement.offsetWidth);")
-    height = Capybara.page.execute_script("return Math.max(document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight);")
+    width = Capybara.page.execute_script(<<~JS)
+      return document.documentElement.scrollWidth
+    JS
+    height = Capybara.page.execute_script(<<~JS)
+      return document.documentElement.scrollHeight
+    JS
 
     window = Capybara.current_session.driver.browser.manage.window
     size_org = window.size
