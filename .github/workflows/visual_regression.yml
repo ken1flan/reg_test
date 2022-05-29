@@ -1,9 +1,10 @@
-name: test
+name: visual-regression
 on: [push]
 
 jobs:
   visual-regression:
-    name: visual-regression
+    name: save screenshot
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
 
     steps:
@@ -16,3 +17,8 @@ jobs:
           ruby-version: '3.1.2'
           bundler-cache: true
       - run: bundle exec rspec --pattern spec/screen_shot/**/*_spec.rb
+      - name: Upload screenshots of main
+        uses: actions/upload-artifact@v3
+        with:
+          name: main-screen-shots
+          path: tmp/capybara
