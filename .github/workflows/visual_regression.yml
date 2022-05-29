@@ -52,7 +52,9 @@ jobs:
       - name: display files
         run: |
           ls -al tmp/capybara
+          ls -al tmp/capybara
           ls -al tmp/main_screenshots
+          ls -al node_modules/.bin
       - name: compare files
         run: |
           node_modules/.bin/reg-cli tmp/capybara  tmp/main_screenshots tmp/result
