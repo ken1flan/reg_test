@@ -67,7 +67,10 @@ jobs:
           ls -al node_modules/.bin
       - name: compare files
         run: |
-          yarn reg-cli tmp/capybara  tmp/main_screenshots tmp/report -R tmp/report/index.html
+          mkdir -p tmp/report
+          mv tmp/main_screenshots tmp/report/main
+          mv tmp/capybara tmp/report/branch
+          yarn reg-cli tmp/report/branch  tmp/report/main tmp/report -R tmp/report/index.html
       - name: Upload diff screenshots
         if: always()
         uses: actions/upload-artifact@v3
